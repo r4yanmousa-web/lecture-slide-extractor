@@ -13,7 +13,11 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from extract_slides import download_video, extract_unique_frames, compile_pdf
-
+# Write YouTube cookies from environment variable, if provided
+_cookies_content = os.environ.get("YOUTUBE_COOKIES")
+if _cookies_content:
+    with open("cookies.txt", "w") as _f:
+        _f.write(_cookies_content)
 app = FastAPI()
 
 # Simple in-memory job store (fine for local testing; a real app would use a database)
