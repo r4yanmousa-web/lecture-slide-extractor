@@ -33,9 +33,16 @@ def download_video(url: str, workdir: str) -> str:
     out_template = os.path.join(workdir, "lecture.%(ext)s")
     cmd = [
         "yt-dlp",
-        "-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+        "-f", "best[ext=mp4]/best",
+        "--extractor-args", "youtube:player_client=android",
         "-o", out_template,
     ]
+
+    cookies_path = os.path.join(os.getcwd(), "cookies.txt")
+    if os.path.exists(cookies_path):
+        cmd += ["--cookies", cookies_path]
+
+    cmd.append(url)
 
     cookies_path = os.path.join(os.getcwd(), "cookies.txt")
     if os.path.exists(cookies_path):
