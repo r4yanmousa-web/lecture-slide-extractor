@@ -38,17 +38,8 @@ def download_video(url: str, workdir: str) -> str:
         "-o", out_template,
     ]
 
-    cookies_path = os.path.join(os.getcwd(), "cookies.txt")
-    if os.path.exists(cookies_path):
-        cmd += ["--cookies", cookies_path]
-
     cmd.append(url)
 
-    cookies_path = os.path.join(os.getcwd(), "cookies.txt")
-    if os.path.exists(cookies_path):
-        cmd += ["--cookies", cookies_path]
-
-    cmd.append(url)
     print(f"[1/4] Downloading video from: {url}")
     subprocess.run(cmd, check=True)
 
