@@ -34,9 +34,12 @@ def download_video(url: str, workdir: str) -> str:
     cmd = [
         "yt-dlp",
         "-f", "best[ext=mp4]/best",
-        "--extractor-args", "youtube:player_client=android",
         "-o", out_template,
     ]
+
+    cookies_path = os.path.join(os.getcwd(), "cookies.txt")
+    if os.path.exists(cookies_path):
+        cmd += ["--cookies", cookies_path]
 
     cmd.append(url)
 
